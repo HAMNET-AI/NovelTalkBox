@@ -29,7 +29,7 @@
     <!-- QA -->
     <div>
       <div class="mt-40 text-lg pl-3 text-white font-bold pb-4 drop-shadow-lg">
-        {{ roleData.name }} 回答过的问题（{{ roleData.chatlog.length }}）
+        {{ roleData.name }} 回答过的问题（{{ roleData.chatlog && roleData.chatlog.length }}）
       </div>
 
       <!-- card -->
