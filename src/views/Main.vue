@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="pt-4">
-      <router-link to="/">
+      <div @click="$router.back()">
         <img
           class="w-16 h-16 rounded-full mx-auto border"
-          src="/hhh.png"
+          :src="roleData.image"
           alt=""
         />
-      </router-link>
-      <h3 class="text-center mt-4">角色名</h3>
+      </div>
+      <h3 class="text-center mt-4">{{ roleData.name }}</h3>
       <div class="text-center mt-4">
         <button
           class="text-white bg-gradient-to-r from-blue-400 via-blue-400 to-blue-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-8 py-2 text-center"
@@ -17,7 +17,7 @@
         </button>
       </div>
     </div>
-    <router-link to="/qa">
+    <router-link :to="`/qa/${id}`">
       <div class="px-4 py-2 bg-white p-4 w-3/4 rounded-xl mx-auto mt-6">
         <p class="p-4 text-center">Ask me anyting！<br />欢迎向我匿名提问！</p>
       </div>
@@ -33,26 +33,38 @@
       </div>
 
       <!-- card -->
-
-      <router-link to="/info">
-        <Card
-          title="正义与复仇的区别"
-          userimg="https://img2.baidu.com/it/u=1185243695,3965528148&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-          content="正义与复仇的区别在于动机和行为的性质。正义是出于道德和法律的合理原因，追求公平和平等，通常通过合法的渠道来解决问题。复仇则是个人的报复行为，出于个人情感，通常超越了法律的界限，以伤害他人为目的。"
-        />
-      </router-link>
-
-      <router-link to="/info">
-        <Card
-          title="真的可以放弃陆地在海里生活吗"
-          userimg="https://img2.baidu.com/it/u=3475381334,1505093482&fm=253&fmt=auto&app=138&f=PNG?w=500&h=540"
-          content="是的，放弃陆地在海里生活是一种可能，但它需要牺牲与陆地社会的联系和舒适，以换取在海底的自由和独立。这是一种极端的生活选择，需要坚定的决心和适应能力。对于我来说，海洋是我热爱的家园。"
-        />
-      </router-link>
+      <div class="px-2">
+        <div class="flex flex-col">
+          <Card v-for="(item, key) in roleData.chatlog" :key="key" :query="item.query" :answer="item.answer" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
+import { ref, watchEffect } from "vue";
+import { getRoleInfo } from "../api";
 import Card from "../components/Card.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const roleData = ref("");
+const id = ref("");
+
+const roleInfo = async (id) => {
+  try {
+    const res = await getRoleInfo(id);
+    roleData.value = res;
+    console.log(roleData.value);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+watchEffect(() => {
+  id.value = router.currentRoute.value.params.roleid;
+  console.log(id.value);
+  roleInfo(id);
+});
 </script>

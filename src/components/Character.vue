@@ -1,14 +1,19 @@
 <template>
-  <div class="w-1/4 bg-[#D9EEEC] p-2 rounded-xl shadow-lg sm:m-4 m-3">
-    <img :src="characterData.imageUrl" alt="" class="rounded-full" />
-    <div class="text-center mt-1">{{ characterData.name }}</div>
+  <div class="bg-[#D9EEEC] p-1 rounded-xl shadow-lg flex m-4">
+    <div class="p-2 w-1/2 text-center">
+      <img :src="Data.image" alt="" />
+    </div>
+    <div class="p-2 w-1/2 flex flex-col justify-around">
+      <div class="text-center">《 {{ Data.name }} 》</div>
+      <div class="text-center">作者：{{ Data.author }}</div>
+    </div>
   </div>
 </template>
 
 <script setup>
   
 const props = defineProps({
-  characterData: Object, // 接受人物卡片的数据对象
+  Data: Object, // 接受人物卡片的数据对象
 });
 </script>
 

@@ -1,25 +1,12 @@
 <template>
-  <div class="p-3 bg-white rounded-xl mx-4 mt-6">
-    <p class="text-center bg-gray-200 p-6 rounded-xl">{{ props.title }}</p>
+  <div class="p-2.5 bg-white rounded-lg m-3">
+    <p class="text-center bg-gray-200 p-6 rounded-lg">{{ query }}</p>
     <div class="flex pt-6">
-      <img
-        :src="props.userimg"
-        alt=""
-        class="rounded-full w-10 h-10 m-auto flex-none"
-      />
-      <p class="p-4 text-sm flex-1">
-        {{ props.content }}
-      </p>
+      <p class="p-4 text-sm flex-1">{{ answer }}</p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-interface Props {
-  title: string;
-  content: string;
-  userimg: string;
-}
-
-const props = defineProps<Props>();
+<script setup>
+const { query, answer } = defineProps(['query', 'answer']);
 </script>
