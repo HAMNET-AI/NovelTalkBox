@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="pt-4">
-      <router-link to="/main">
+      <div @click="$router.back()">
         <img
           class="w-16 h-16 rounded-full mx-auto border"
           :src="roleData.image"
           alt=""
         />
-      </router-link>
+      </div>
       <h3 class="text-center mt-4">{{ roleData.name }}</h3>
       <div class="text-center mt-4">
         <button

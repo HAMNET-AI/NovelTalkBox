@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="px-2">
-      <div class="flex flex-wrap">
+      <div class="text-center">
+        <button @click="$router.back()" class="mx-auto p-3 bg-[#71d98c] rounded-lg text-lg">返回书本页</button>
+      </div>
+      <div class="flex flex-wrap mt-4">
         <RoleCard 
           v-for="i in role"
           :key="i.id"
@@ -15,9 +18,11 @@
     <div
       v-if="showModal"
       class="fixed inset-0 flex items-center justify-center z-10 bg-black/20 backdrop-blur-sm"
+      @click="showModal = false"
     >
       <div
         class="bg-white w-4/5 sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 rounded-xl shadow-lg"
+        @click.stop
       >
         <h2 class="text-xl font-bold mb-2 text-center">
           选择了 {{ selectedRole.name }}
