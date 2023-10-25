@@ -65,6 +65,7 @@ const id = ref('')
 const roleData = async (id) => {
   try {
     const res = await getRoleData(id);
+    console.log(res);
     role.value = res.data; // 将数据存储在响应式变量中
     console.log(role.value);
   } catch (err) {
@@ -74,7 +75,8 @@ const roleData = async (id) => {
 
 watchEffect(() => {
   id.value = router.currentRoute.value.params.bookid;
-  roleData(id);
+  console.log(id.value);
+  roleData(id.value);
 });
 
 </script>

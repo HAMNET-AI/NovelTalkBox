@@ -66,7 +66,8 @@ const submit = async () => {
   console.log(question.value);
   try {
     const res = await newChat(question.value, id.value);
-    msg.value = res.data.content;
+    console.log(res);
+    msg.value = res.data[0].content;
   } catch (err) {
     console.log(err);
   }
@@ -76,7 +77,6 @@ const roleInfo = async (id) => {
   try {
     const res = await getRoleInfo(id);
     roleData.value = res;
-    console.log(roleData.value);
   } catch (err) {
     console.log(err);
   }
